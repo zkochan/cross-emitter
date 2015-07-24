@@ -1,0 +1,33 @@
+{
+  "name": "cross-emitter",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zkochan/cross-emitter.git"
+  },
+  "keywords": [
+    "event",
+    "emitter",
+    "cross",
+    "origin",
+    "postmessage"
+  ],
+  "author": {
+    "name": "Zoltan Kochan",
+    "email": "zoltan.kochan@gmail.com",
+    "url": "http://kochan.io"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zkochan/cross-emitter/issues"
+  },
+  "homepage": "https://github.com/zkochan/cross-emitter#readme",
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org"
+  }
+}
