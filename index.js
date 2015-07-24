@@ -21,6 +21,10 @@ function CrossEmitter(opts) {
   this._origin = opts.origin || '*';
   this._channel = opts.channel || 'default';
   this._eventCallbacks = {};
+  
+  /* for mocking */
+  var addEventListener = opts.addEventListener || window.addEventListener;
+  var attachEvent = opts.attachEvent || window.attachEvent;
 
 
   var _this = this;
@@ -31,10 +35,10 @@ function CrossEmitter(opts) {
     }
   }
 
-  if (window.addEventListener) {
-    window.addEventListener('message', onMessage, false);
+  if (addEventListener) {
+    addEventListener('message', onMessage, false);
   } else {
-    window.attachEvent('onmessage', onMessage, false);
+    attachEvent('onmessage', onMessage, false);
   }
 }
 
