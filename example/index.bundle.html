@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+<style>
+  iframe, .outer-events {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  iframe {
+    height: 100%;
+    width: 50%;
+  }
+
+  .outer-events {
+    padding: 10px 15px;
+  }
+</style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/outer.js"></script>
+<iframe id="iframe" src="/iframe.html"></iframe>
+<div class="outer-events">
+  <label>
+    Outer event:
+    <input id="eventName" type="text" />
+  </label>
+  <button>Send</button>
+  <div class="events">
+  </div>
+</div>
