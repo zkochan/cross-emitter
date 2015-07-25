@@ -1,45 +1,17 @@
 'use strict';
 
-function parse(data) {
-  var parsedData;
-  try {
-    parsedData = JSON.parse(data);
-  } catch (err) {
-    parsedData = {};
-  }
-  return parsedData;
-}
+var FrameMessage = require('frame-message');
 
 function CrossEmitter(opts) {
   opts = opts || {};
-
-  if (!opts.target) {
-    throw new Error('opts.target is required');
-  }
-
-  this._target = opts.target;
-  this._origin = opts.origin || '*';
-  this._channel = opts.channel || 'default';
-  this._eventCallbacks = {};
   
-  /* for mocking */
-  var addEventListener = opts.addEventListener || window.addEventListener;
-  var attachEvent = opts.attachEvent || window.attachEvent;
-
+  this._eventCallbacks = {};
+  this._frameMessage = new FrameMessage(opts);
 
   var _this = this;
-  function onMessage(e) {
-    var event = parse(e.data);
-    if (event.channel === _this._channel) {
-      _this.innerEmit.apply(_this, event.args);
-    }
-  }
-
-  if (addEventListener) {
-    addEventListener('message', onMessage, false);
-  } else {
-    attachEvent('onmessage', onMessage, false);
-  }
+  this._frameMessage.recieve(function() {
+    _this.innerEmit.apply(_this, arguments);
+  });
 }
 
 CrossEmitter.prototype.on = function(event, cb) {
@@ -76,11 +48,7 @@ CrossEmitter.prototype.emit = function(event) {
 
   this.innerEmit.apply(this, arguments);
 
-  var msg = {
-    channel: this._channel,
-    args: Array.prototype.slice.call(arguments)
-  };
-  this._target.postMessage(JSON.stringify(msg), this._origin);
+  this._frameMessage.post.apply(this._frameMessage, arguments);
 };
 
 module.exports = CrossEmitter;
