@@ -1,6 +1,6 @@
 {
   "name": "cross-emitter",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "EventEmitter style wrapper around postMessage.",
   "main": "index.js",
   "scripts": {
@@ -36,6 +36,6 @@
     "gulp": "^3.9.0"
   },
   "dependencies": {
-    "frame-message": "0.1.0"
+    "frame-message": "0.2.0"
   }
 }

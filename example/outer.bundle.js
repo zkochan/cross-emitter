@@ -4,7 +4,9 @@ var CrossEmitter = require('../');
 
 $(function() {
   var crossEmitter = new CrossEmitter({
-    target: document.getElementById('iframe').contentWindow
+    targets: [{
+      window: document.getElementById('iframe').contentWindow
+    }]
   });
 
   $('button').click(function() {

@@ -2,7 +2,9 @@
 
 var CrossEmitter = require('../');
 var crossEmitter = new CrossEmitter({
-  target: window.parent
+  targets: [{
+    window: window.parent
+  }]
 });
 
 $(function() {

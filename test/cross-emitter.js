@@ -3,7 +3,9 @@
 var sinon = require('sinon');
 var CrossEmitter = require('../');
 var dummyTarget = {
-  postMessage: function() {}
+  window: {
+    postMessage: function() {}
+  }
 };
 
 describe('CrossEmitter', function() {
@@ -11,7 +13,7 @@ describe('CrossEmitter', function() {
     it('arguments are passed to the handler', function() {
       var handler = sinon.spy();
       var crossEmitter = new CrossEmitter({
-        target: dummyTarget
+        targets: [dummyTarget]
       });
       crossEmitter.on('foo', handler);
       crossEmitter.emit('foo', 1, 2);
@@ -23,7 +25,7 @@ describe('CrossEmitter', function() {
       var handler1 = sinon.spy();
       var handler2 = sinon.spy();
       var crossEmitter = new CrossEmitter({
-        target: dummyTarget
+        targets: [dummyTarget]
       });
       crossEmitter.on('foo', handler1);
       crossEmitter.on('foo', handler2);
@@ -38,10 +40,12 @@ describe('CrossEmitter', function() {
       var postMessage = sinon.spy();
       var crossEmitter = new CrossEmitter({
         channel: 'fooChannel',
-        target: {
-          postMessage: postMessage
-        },
-        origin: 'http://google.com'
+        targets: [{
+          window: {
+            postMessage: postMessage
+          },
+          origin: 'http://google.com'
+        }]
       });
       crossEmitter.emit('foo', 1, 2);
 
@@ -55,7 +59,7 @@ describe('CrossEmitter', function() {
       var cb;
       var crossEmitter = new CrossEmitter({
         channel: 'barChannel',
-        target: dummyTarget,
+        targets: [dummyTarget],
         addEventListener: function(event, _cb, useCapture) {
           expect(event).to.eq('message');
           expect(useCapture).to.be.false;

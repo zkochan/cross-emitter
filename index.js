@@ -1,15 +1,17 @@
 'use strict';
 
-var FrameMessage = require('frame-message');
+var Subscriber = require('frame-message').Subscriber;
+var Publisher = require('frame-message').Publisher;
 
 function CrossEmitter(opts) {
   opts = opts || {};
-  
+
   this._eventCallbacks = {};
-  this._frameMessage = new FrameMessage(opts);
+  this._subscriber = new Subscriber(opts);
+  this._publisher = new Publisher(opts);
 
   var _this = this;
-  this._frameMessage.recieve(function() {
+  this._subscriber.subscribe(function() {
     _this.innerEmit.apply(_this, arguments);
   });
 }
@@ -48,7 +50,7 @@ CrossEmitter.prototype.emit = function(event) {
 
   this.innerEmit.apply(this, arguments);
 
-  this._frameMessage.post.apply(this._frameMessage, arguments);
+  this._publisher.publish.apply(this._publisher, arguments);
 };
 
 module.exports = CrossEmitter;
