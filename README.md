@@ -38,7 +38,8 @@ innerEmitter.on('hello', function(msg) {
   console.log('from iframe: ' + msg);
 });
 
-/* Emitting events works in both directions. It is possible to listen events from the parent window.  */
+/* Emitting events works in both directions. 
+ * It is possible to listen events from the parent window.  */
 innerEmitter.on('gotHello', function(times) {
   console.log('Parent window received hello ', times, ' times');
 });
