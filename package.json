@@ -1,6 +1,6 @@
 {
   "name": "cross-emitter",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "EventEmitter style wrapper around postMessage.",
   "main": "index.js",
   "scripts": {

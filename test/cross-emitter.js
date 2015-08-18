@@ -80,4 +80,16 @@ describe('CrossEmitter', function() {
       expect(handler.calledWithExactly(43, 23, 1)).to.be.true;
     });
   });
+
+  it('removes listener', function() {
+    var handler = sinon.spy();
+    var crossEmitter = new CrossEmitter({
+      channel: 'foo',
+      targets: [dummyTarget]
+    });
+    crossEmitter.on('bar', handler);
+    crossEmitter.removeListener('bar', handler);
+    crossEmitter.emit('bar');
+    sinon.assert.notCalled(handler);
+  });
 });

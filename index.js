@@ -53,4 +53,20 @@ CrossEmitter.prototype.emit = function(event) {
   this._publisher.publish.apply(this._publisher, arguments);
 };
 
+CrossEmitter.prototype.removeListener = function(event, listener) {
+  var callbacks = this._eventCallbacks[event];
+  if (!callbacks) {
+    return;
+  }
+
+  var i = 0;
+  while(i < callbacks.length) {
+    if (callbacks[i] === listener) {
+      callbacks.splice(i, 1);
+    } else {
+      i++;
+    }
+  }
+};
+
 module.exports = CrossEmitter;
