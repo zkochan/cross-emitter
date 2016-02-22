@@ -67,4 +67,4 @@ outerEmitter.on('hello', function(msg) {
 
 ## License
 
-MIT
+MIT © [Zoltan Kochan](https://www.kochan.io)
